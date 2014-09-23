@@ -1,6 +1,22 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Chemotaxis extends PApplet {
+
     Bacteria [] one = new Bacteria[20];
     Stimulus [] two = new Stimulus[3];
-    void setup()   
+    public void setup()   
     {     
     	size(600,600);
         
@@ -12,7 +28,7 @@
     		two[i]= new Stimulus();
     	}
     }   
-    void draw()   
+    public void draw()   
     {    
     	background(255);
     	noStroke();
@@ -47,7 +63,7 @@
             }
         }
     }  
-    void mousePressed(){
+    public void mousePressed(){
        two = new Stimulus[1 + two.length];
        for (int i=0;i<two.length;i++){
             two[i]= new Stimulus();
@@ -69,13 +85,13 @@
     		rad=20;
             opax=255;
     	}   
-    	void ranWalk(){
+    	public void ranWalk(){
     		myX=myX + (int)(Math.random()*21)+movToX;
     		myY=myY + (int)(Math.random()*21)+movToY;
     		//myX=myX + (int)(Math.random()*5)-2;
     		//myY=myY + (int)(Math.random()*5)-2;
     	}
-    	void show(){
+    	public void show(){
     		fill(color1,color2,color3,opax);
     		ellipse(myX,myY,rad,rad);
     	}
@@ -90,8 +106,17 @@
     		sC2=(int)(Math.random()*100)+100;
     		sC1=(int)(Math.random()*100)+150;
     	}
-    	void show(){
+    	public void show(){
     		fill(sC1,sC2,sC3);
     		rect(sX,sY,15,15);
     	}
     }
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Chemotaxis" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
+}
